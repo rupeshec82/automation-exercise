@@ -17,12 +17,12 @@ import org.testng.annotations.Test;
 public class WebAutomationTest {
 	
 	@Test
-	public void automationExercise1() {
+	public void automationExercise1() throws InterruptedException {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("start-maximized");
 		ChromeDriver driver = new ChromeDriver(options);
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 		
 		//Open web and click on sign in button
 		driver.get("https://automationexercise.com");
@@ -62,10 +62,13 @@ public class WebAutomationTest {
 		driver.findElement(
 				By.xpath("//div[contains(@class,'productinfo')]//p[text()='Fancy Green Top']/following-sibling::a"))
 				.click();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[text()='Continue Shopping']")).click();
-		driver.findElement(
+		js.executeScript("window.scrollBy(0,-350)");
+				driver.findElement(
 				By.xpath("//div[contains(@class,'productinfo')]//p[text()='Summer White Top']/following-sibling::a"))
 				.click();
+		Thread.sleep(2000);
 		
 		//View cart and proceed to checkout
 		driver.findElement(By.linkText("View Cart")).click();
